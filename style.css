@@ -190,64 +190,109 @@ ul {
     color: #fff;
 }
 
-/* Menu Mobile Hamburguer */
+/* ===============================
+   BOTÃO MENU HAMBÚRGUER
+================================ */
 .menu-btn {
-    display: none;
     background: none;
     border: none;
     cursor: pointer;
+    display: none;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     padding: 1rem;
 }
 
-.bar {
-    display: block;
-    width: 25px;
+/* Barrinhas */
+.menu-btn .bar {
+    width: 26px;
     height: 3px;
     background-color: var(--color-dark);
     transition: all 0.3s ease;
+    border-radius: 2px;
 }
 
-/* Menu Mobile Gaveta */
+/* ===============================
+   MENU MOBILE (GAVETA)
+================================ */
 .menu-mobile {
     position: fixed;
-    top: 8rem; /* Abaixo do header */
+    top: 0;
     left: 0;
     width: 100%;
+    height: auto;
     background-color: var(--color-white);
-    border-top: 1px solid var(--color-border);
-    padding: 2rem;
+    padding: 6rem 2rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    transform: translateY(-150%);
+
+    transform: translateY(-120%);
     opacity: 0;
     transition: transform 0.4s ease, opacity 0.4s ease;
-    z-index: 999;
+
+    z-index: 9999;
     box-shadow: var(--shadow-lg);
 }
 
+/* Menu aberto */
 .menu-mobile.ativo {
     transform: translateY(0);
     opacity: 1;
 }
 
+/* Links */
 .mobile-link {
     font-size: 1.8rem;
     font-weight: 500;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--color-light-gray);
+    color: var(--color-dark);
 }
 
+/* CTA */
 .mobile-cta {
     text-align: center;
     background: var(--color-primary);
-    color: white;
+    color: #fff;
     padding: 1.5rem;
     border-radius: var(--radius-md);
     font-weight: bold;
     margin-top: 1rem;
+}
+
+/* ===============================
+   MOBILE ONLY
+================================ */
+@media (max-width: 768px) {
+
+    /* Botão ☰ sempre clicável */
+    .menu-btn {
+        display: flex;
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 10000;
+        pointer-events: auto;
+    }
+
+    /* Garante que nada cubra o menu */
+    header,
+    section,
+    .card,
+    .cards,
+    .hero,
+    .banner {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Overlays não bloqueiam clique */
+    .overlay,
+    .card::before,
+    .card::after {
+        pointer-events: none;
+    }
 }
 
 /* ===============================================================================
@@ -745,4 +790,5 @@ ul {
         flex-direction: column;
         gap: 1.5rem;
     }
+
 }
