@@ -105,23 +105,32 @@
 </footer>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Seleciona o botão e o menu pelo id
     const btnMobile = document.getElementById("btnMobile");
     const menuMobile = document.getElementById("menuMobile");
 
     if (btnMobile && menuMobile) {
+        // Clique no botão ☰ abre ou fecha o menu
         btnMobile.addEventListener("click", () => {
-            const aberto = menuMobile.classList.toggle("menu-mobile-aberto");
+            const aberto = menuMobile.classList.toggle("ativo"); // mesma classe do CSS
             btnMobile.setAttribute("aria-expanded", aberto ? "true" : "false");
         });
 
+        // Fecha o menu ao clicar em qualquer link
         menuMobile.querySelectorAll("a").forEach(link => {
             link.addEventListener("click", () => {
-                menuMobile.classList.remove("menu-mobile-aberto");
+                menuMobile.classList.remove("ativo");
                 btnMobile.setAttribute("aria-expanded", "false");
             });
         });
     }
+
+});
 </script>
 
+
 </body>
+
 </html>
