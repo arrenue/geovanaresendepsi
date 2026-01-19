@@ -12,11 +12,12 @@
 
 <header class="header">
     <section class="container header-inner">
-<a href="#home" class="logo" aria-label="Ir para o topo">
+       <a href="index.html" class="logo"> 
                 <img src="https://img.icons8.com/?size=100&id=2802&format=png&color=12B886" alt="Símbolo Psicologia"
                     width="40" height="40">
                 <span class="logo-text">Geovana Resende</span>
             </a>
+
         <nav class="navbar">
             <a href="index.html#home">Home</a>
             <a href="index.html#sobre">Sobre</a>
@@ -120,23 +121,51 @@
 </footer>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
     const btnMobile = document.getElementById("btnMobile");
     const menuMobile = document.getElementById("menuMobile");
 
     if (btnMobile && menuMobile) {
-        btnMobile.addEventListener("click", () => {
-            const aberto = menuMobile.classList.toggle("menu-mobile-aberto");
-            btnMobile.setAttribute("aria-expanded", aberto ? "true" : "false");
-        });
+        function toggleMenu(event) {
+            // Se for evento de touch, evita o click duplicado
+            if (event.type === 'touchstart') event.preventDefault();
+            
+            const isActive = menuMobile.classList.contains("ativo");
+            
+            if (!isActive) {
+                menuMobile.classList.add("ativo");
+                btnMobile.classList.add("ativo");
+                btnMobile.setAttribute("aria-expanded", "true");
+            } else {
+                menuMobile.classList.remove("ativo");
+                btnMobile.classList.remove("ativo");
+                btnMobile.setAttribute("aria-expanded", "false");
+            }
+        }
 
+        btnMobile.addEventListener("click", toggleMenu);
+        btnMobile.addEventListener("touchstart", toggleMenu);
+
+        // Fechar ao clicar em qualquer link do menu
         menuMobile.querySelectorAll("a").forEach(link => {
             link.addEventListener("click", () => {
-                menuMobile.classList.remove("menu-mobile-aberto");
+                menuMobile.classList.remove("ativo");
+                btnMobile.classList.remove("ativo");
                 btnMobile.setAttribute("aria-expanded", "false");
             });
         });
     }
-</script>
 
+    // Header Sombra ao Rolar
+    const header = document.querySelector(".header");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header?.classList.add("header-scrolled");
+        } else {
+            header?.classList.remove("header-scrolled");
+        }
+    });
+});
+</script>
 </body>
 </html>
